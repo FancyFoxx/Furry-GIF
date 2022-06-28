@@ -1,0 +1,39 @@
+{
+  "name": "furry-gif",
+  "version": "0.1.0",
+  "description": "Telegram bot and accompanying web interface for saving, tagging, and managing furry-related GIFs.",
+  "author": {
+    "name": "Fancy Foxx",
+    "email": "MrFancyFoxx@Gmail.com"
+  },
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FancyFoxx/Furry-Gif.git"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node bin/www.js"
+  },
+  "keywords": [
+    "furry",
+    "gif",
+    "telegram",
+    "bot"
+  ],
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "~4.16.1",
+    "express-validator": "^6.14.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "mysql2": "^2.3.3",
+    "passport": "^0.6.0",
+    "passport-telegram-official": "^1.1.0",
+    "validator": "^13.7.0"
+  }
+}

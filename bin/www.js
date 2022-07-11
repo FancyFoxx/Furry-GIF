@@ -12,6 +12,8 @@
 import "dotenv/config";
 import app from "../expressApp.js";
 import http from "http";
+import "../bot/commands.js";
+import "../bot/events.js";
 
 /**
  * Get port from environment and store in Express.

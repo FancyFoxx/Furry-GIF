@@ -23,9 +23,9 @@ expressApp.use(logger("dev"));
 // Configure app to allow types of POST data.
 expressApp.use(express.json());
 expressApp.use(express.urlencoded({
-	type : ["application/x-www-form-urlencoded"],
-	extended : true,
-	limit : 1024000
+	type: ["application/x-www-form-urlencoded"],
+	extended: true,
+	limit: "1mb"
 }));
 expressApp.use(cookieParser());
 
@@ -43,7 +43,7 @@ expressApp.use(function(request, response, next) {
 expressApp.use(function(error, request, response, next) {
 	// Set locals, only providing error in development
 	response.locals.message = error.message;
-	response.locals.error = request.expressApp.get("env") === "development" ? error : {};
+	response.locals.error = process.env.ENV === "development" ? error : {};
 
 	// Render the error page
 	response.status(error.status || 500);

@@ -18,12 +18,15 @@ DB_USER=<string>
 DB_HOST=<string>
 DB_PASSWORD=<string>
 DB_DATABASE=<string>
+
+BOT_TOKEN=<string>
 ```
 - `PORT` Port number from which the web application can be accessed.
 - `DB_USER` Username of the MySQL Database account.
 - `DB_HOST` Hostname from which the MySQL account will access the database.
 - `DB_PASSWORD` Password for MySQL Database account
 - `DB_DATABASE` Name of database which to connect for data storage.
+- `BOT_TOKEN` Telegram bot authentication token.
 
 ## License
 

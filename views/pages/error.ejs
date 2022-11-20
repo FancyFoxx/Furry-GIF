@@ -1,0 +1,11 @@
+
+<h1><%= error.status %>: <%= error.name %></h1>
+<p><%= error.message %></p>
+<pre><code><%= error.stack %></code></pre>
+
+<% while (error.cause) { %>
+    <h2><%= error.cause.status %>: <%= error.cause.name %></h2>
+    <p><%= error.cause.message %></p>
+    <pre><code><%= error.cause.stack %></code></pre>
+    <% error = error.cause %>
+<% } %>

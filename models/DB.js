@@ -51,8 +51,9 @@ class DB {
 		return new Promise((resolve, reject) => {
 			this.#pool.query(sql, values, (queryError, results, fields) => {
 				if (queryError) {
+					console.error(`Error querying the database. ${queryError.code}: ${queryError.sqlMessage} SQL: ${sql}. ${values ? "Values: " + values.join(", ") : ""}`);
 					const QueryError = new Error(
-						`Error querying the database. ${queryError.code}: ${queryError.sqlMessage}`,
+						`Error querying the database. ${queryError.code}: ${queryError.sqlMessage} SQL: ${sql}. ${values ? "Values: " + values.join(", ") : ""}`,
 						{cause: queryError}
 					);
 					QueryError.name = "QueryError";

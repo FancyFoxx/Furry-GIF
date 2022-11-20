@@ -1,0 +1,23 @@
+@charset "utf-8";
+@import "../../node_modules/bulma/bulma.sass";
+
+html {
+  background-color: #1c1c1c;
+}
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.thumb {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.thumb:hover {
+  opacity: 50%;
+}

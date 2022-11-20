@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<%- include("../partials/head.partial.ejs"); %>
+</head>
+<body class=" container">
+	<header>
+		<%- include("../partials/header.partial.ejs"); %>
+	</header>
+	<main>
+		<p>Save, tag, and search the library of Furry GIFs</p>
+		<form action="/gif" method="get">
+			<div class="field has-addons">
+				<p class="control has-icons-left">
+					<input class="input" type="search" placeholder="Search GIFs" />
+					<span class="icon is-small is-left">
+						<i class="fas fa-search"></i>
+					</span>
+				</p>
+				<div class="control">
+					<input type="submit" class="button is-info" />
+				</div>
+			</div>
+		</form>
+	</main>
+	<footer>
+		<%- include("../partials/footer.partial.ejs"); %>
+	</footer>
+</body>
+</html>

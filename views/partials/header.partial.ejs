@@ -1,0 +1,26 @@
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavigation">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+
+    <div id="mainNavigation" class="navbar-menu">
+        <div class="navbar-start">
+            <a href="/gif" class="navbar-item">GIFs</a>
+            <a href="/tag" class="navbar-item">Tags</a>
+            <a href="/alias" class="navbar-item">Aliases</a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <% if (user) { %>
+                        <a href="/logout" class="button is-primary">Log Out</a>
+                    <% } else { %>
+                        <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-login="FurryGIF_Bot" data-size="medium" data-radius="4" data-auth-url="/login" data-request-access="write"></script>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

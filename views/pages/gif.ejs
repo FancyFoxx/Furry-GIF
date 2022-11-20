@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../partials/head.partial.ejs"); %>
+    <script src="/javascripts/gifPage.js"></script>
+</head>
+<body>
+<header>
+    <%- include("../partials/header.partial.ejs"); %>
+</header>
+<main>
+    <div class="columns">
+        <aside class="column is-one-fifth card">
+            <div class="card-content">
+                <div class="content">
+                    <h3>Tags</h3>
+                    <% const artistTags = tags.filter(tag => tag.category === "artist") %>
+                    <% if (artistTags.length) { %>
+                        <h4>Artists</h4>
+                        <ul>
+                            <% for (const tag of artistTags) { %>
+                                <li>
+                                    <a href="<%= `/gif?tags=${tag.tag}` %>" class="has-text-warning-dark"><%= tag.tag %></a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                    <% const characterTags = tags.filter(tag => tag.category === "character") %>
+                    <% if (characterTags.length) { %>
+                        <h4>Characters</h4>
+                        <ul>
+                            <% for (const tag of characterTags) { %>
+                                <li>
+                                    <a href="<%= `/gif?tags=${tag.tag}` %>" class="has-text-success-dark"><%= tag.tag %></a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                    <% const speciesTags = tags.filter(tag => tag.category === "species") %>
+                    <% if (speciesTags.length) { %>
+                        <h4>Species</h4>
+                        <ul>
+                            <% for (const tag of speciesTags) { %>
+                                <li>
+                                    <a href="<%= `/gif?tags=${tag.tag}` %>" class="has-text-danger-dark"><%= tag.tag %></a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                    <% const copyrightTags = tags.filter(tag => tag.category === "copyright") %>
+                    <% if (copyrightTags.length) { %>
+                        <h4>Copyrights</h4>
+                        <ul>
+                        <% for (const tag of copyrightTags) { %>
+                            <li>
+                                <a href="<%= `/gif?tags=${tag.tag}` %>" class="has-text-info-dark"><%= tag.tag %></a>
+                            </li>
+                        <% } %>
+                        </ul>
+                    <% } %>
+                    <% const generalTags = tags.filter(tag => tag.category === "general") %>
+                    <% if (generalTags.length) { %>
+                        <h4>General</h4>
+                        <ul>
+                            <% for (const tag of generalTags) { %>
+                                <li>
+                                    <a href="<%= `/gif?tags=${tag.tag}` %>" class="has-text-dark"><%= tag.tag %></a>
+                                </li>
+                            <% } %>
+                        </ul>
+                        <% } %>
+                        <% const metaTags = tags.filter(tag => tag.category === "meta") %>
+                        <% if (metaTags.length) { %>
+                        <h4>Meta</h4>
+                        <ul>
+                            <% for (const tag of metaTags) { %>
+                                <li>
+                                    <a href="<%= `/gif?tags=${tag.tag}` %>" class="has-text-light"><%= tag.tag %></a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                    <h3>Sources</h3>
+                    <ul>
+                        <% for (const source of sources) { %>
+                        <li>
+                            <a href="<%= source.source %>" target="_blank"><%= source.source %></a>
+                        </li>
+                        <% } %>
+                    </ul>
+                    <dl>
+                        <dt>
+                            <label for="rating_input">Rating</label>
+                        </dt>
+                        <dd id="rating" class="<%= gif.rating === "safe" ? "has-text-success" : "has-text-danger" %>"><%= gif.rating %></dd>
+                        <dt>Size</dt>
+                        <dd><%= gif.width %>&times;<%= gif.height %> (<%= `${Math.round(gif.fileSize/100)/10} KB` %>)</dd>
+                        <dt>Duration</dt>
+                        <dd><%= `${gif.duration}s` %></dd>
+                        <dt>File</dt>
+                        <dd><a href="<%= gif.fileUniqueId %>/file">Download</a>
+                    </dl>
+                </div>
+            </div>
+        </aside>
+        <article class="column is-vcentered">
+            <video src="/gif/<%= gif.fileUniqueId %>/file" poster="/gif/<%= gif.fileUniqueId %>/thumb" muted playsinline autoplay loop></video>
+        </article>
+    </div>
+    <a href="/gif/<%= gif.fileUniqueId %>/edit">Edit</a>
+    <% if (["moderator", "administrator"].includes(user.role)) { %>
+        <a href="#" onClick="page.destroy('<%= gif.fileUniqueId %>')">Delete</a>
+    <% } %>
+</main>
+<footer>
+    <%- include("../partials/footer.partial.ejs"); %>
+</footer>
+</body>
+</html>

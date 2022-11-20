@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../partials/head.partial.ejs"); %>
+    <script src="/javascripts/gifEditPage.js"></script>
+</head>
+<body>
+<header>
+    <%- include("../partials/header.partial.ejs"); %>
+</header>
+<main>
+    <div class="columns">
+        <aside class="column is-one-fifth card">
+            <div class="card-content">
+                <form class="content" autocomplete="off" action="." name="gifPatch">
+                    <fieldset name="tags">
+                        <legend>Tags</legend>
+
+                        <div>
+                            <label for="artistTags">Artists / Makers</label>
+                            <input type="text" name="artist" id="artistTags" placeholder="Add artist / maker tag" value="<%= tags.filter(tag => tag.category === "artist").map(tag => tag.tag).join(" ") %>" />
+                        </div>
+                        <div>
+                            <label for="characterTags">Characters</label>
+                            <input type="text" name="character" id="characterTags" placeholder="Add character tag" value="<%= tags.filter(tag => tag.category === "character").map(tag => tag.tag).join(" ") %>" />
+                        </div>
+                        <div>
+                            <label for="speciesTags">Species</label>
+                            <input type="text" name="species" id="speciesTags" placeholder="Add species tag" value="<%= tags.filter(tag => tag.category === "species").map(tag => tag.tag).join(" ") %>" />
+                        </div>
+                        <div>
+                            <label for="copyrightTags">Copyright</label>
+                            <input type="text" name="copyright" id="copyrightTags" placeholder="Add copyright tag" value="<%= tags.filter(tag => tag.category === "copyright").map(tag => tag.tag).join(" ") %>" />
+                        </div>
+                        <div>
+                            <label for="generalTags">General</label>
+                            <input type="text" name="general" id="generalTags" placeholder="Add general tag" value="<%= tags.filter(tag => tag.category === "general").map(tag => tag.tag).join(" ") %>" />
+                        </div>
+                        <div>
+                            <label for="metaTags">Meta</label>
+                            <input type="text" name="meta" id="metaTags" placeholder="Add meta tag" value="<%= tags.filter(tag => tag.category === "meta").map(tag => tag.tag).join(" ") %>" />
+                        </div>
+                    </fieldset>
+
+                    <label for="sources">Sources</label>
+                    <textarea name="sources" id="sources" placeholder="Add a source"><%= sources.join(" ") %></textarea>
+
+                    <label for="rating">Rating</label>
+                    <select name="rating" id="rating">
+                        <option value="safe" <%= gif.rating === "safe" ? "selected" : "" %>>Safe</option>
+                        <option value="explicit" <%= gif.rating === "explicit" ? "selected" : "" %>>Explicit</option>
+                    </select>
+                    <input type="button" value="Save" onClick="page.patch('<%= gif.fileUniqueId %>');" />
+                </form>
+            </div>
+        </aside>
+        <article class="column is-vcentered">
+            <video src="/gif/<%= gif.fileUniqueId %>/file" poster="/gif/<%= gif.fileUniqueId %>/thumb" muted playsinline autoplay loop></video>
+        </article>
+    </div>
+    <% if (["moderator", "administrator"].includes(user.role)) { %>
+        <a href="#" onClick="page.destroy('<%= gif.fileUniqueId %>');">Delete</a>
+    <% } %>
+</main>
+<footer>
+    <%- include("../partials/footer.partial.ejs"); %>
+</footer>
+</body>
+</html>

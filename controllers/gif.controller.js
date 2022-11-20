@@ -83,11 +83,35 @@ class GifController {
 		if (changes.tags) {
 			// Convert provided tag names to Tag objects.
 			for (let i = 0, length = changes.tags.length; i < length; i++) {
-				const tagName = changes.tags[i];
+				let tagName = "";
+				let tagCategory = "general";
+				// Filter out any tags specified by type from the tag array.
+				// Artist
+				if (changes.tags[i].match(/artist:\w+(?:$|\s)/iu)) {
+					tagName = changes.tags[i].replace("artist:", "");
+					tagCategory = "artist";
+				} else if (changes.tags[i].match(/character:\w+(?:$|\s)/iu)) {
+					tagName = changes.tags[i].replace("character:", "");
+					tagCategory = "character";
+				} else if (changes.tags[i].match(/species:\w+(?:$|\s)/iu)) {
+					tagName = changes.tags[i].replace("species:", "");
+					tagCategory = "species";
+				} else if (changes.tags[i].match(/copyright:\w+(?:$|\s)/iu)) {
+					tagName = changes.tags[i].replace("copyright:", "");
+					tagCategory = "copyright";
+				} else if (changes.tags[i].match(/general:\w+(?:$|\s)/iu)) {
+					tagName = changes.tags[i].replace("general:", "");
+					tagCategory = "general";
+				} else if (changes.tags[i].match(/meta:\w+(?:$|\s)/iu)) {
+					tagName = changes.tags[i].replace("meta:", "");
+					tagCategory = "meta";
+				} else {
+					tagName = changes.tags[i];
+				}
 				let tag = await Tag.readByTagName(tagName);
 				// If an existing Tag (or associated alias) is not found, create it.
 				if (!tag) {
-					tag = new Tag({tag: tagName});
+					tag = new Tag({tag: tagName, category: tagCategory});
 					await tag.create();
 				}
 				changes.tags[i] = tag;

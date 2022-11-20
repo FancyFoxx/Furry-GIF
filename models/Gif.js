@@ -358,7 +358,7 @@ class Gif {
 	 */
 	get tags() {
 		return (async () => {
-			const sql = "SELECT tag FROM GifTag WHERE fileUniqueId = ?";
+			const sql = "SELECT Tag.tag, category FROM GifTag JOIN Tag on GifTag.tag = Tag.tag WHERE fileUniqueId = ?";
 			try {
 				const resultSet = await DB.getData(sql, [this.fileUniqueId]);
 				return resultSet.rows.map(row => new Tag(row));
